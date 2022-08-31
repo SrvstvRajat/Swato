@@ -31,10 +31,10 @@ function NavBar() {
                         <>
                         {console.log(user)}
                             <li>
-                                <Link to="/profilePage">{user?.data?.name}</Link>
+                                <Link to="/profilePage">ProfilePage{user?.data?.name}</Link>
                             </li>
                             <li>
-                                <Link to="/" onClick={logout}>Logout</Link>
+                                <Link to="/logout" onClick={logout}>Logout</Link>
                             </li>
                         </>
                         :

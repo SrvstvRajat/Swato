@@ -9,6 +9,9 @@ planRouter
 .route('/allPlans')
 .get(getAllPlans)
 
+planRouter
+.route('/top3')
+.get(top3Plans)
 
 
 // check whether user logged in or not
@@ -30,9 +33,6 @@ planRouter
 .patch(updatePlan)
 .delete(deletePlan)
 
-planRouter
-.route('/top3')
-.get(top3Plans)
 
 // top 3 plan
 module.exports=planRouter;

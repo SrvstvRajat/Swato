@@ -3,13 +3,15 @@ const usermodel = require("../models/usermodel");
 // const protectroute=require('../Routers/authhelper')
 const jwt = require("jsonwebtoken");
 const JWT_KEY = "rchtfgyjhuji3o2e381";
-
+const bcrypt=require('bcrypt');
+const { sendMail } = require("../utility/nodemailer");
 // signup
 module.exports.signup = async function signup(req, res) {
   try {
     console.log("Signed up");
     let data = req.body;
     let user = await usermodel.create(data);
+    sendMail("signup",user);
     if (user) {
       res.json({
         message: "user signed up",
@@ -33,8 +35,10 @@ module.exports.login = async function login(req, res) {
   try {
     let data = req.body;
     let user = await usermodel.findOne({ email: data.email });
-    if (user) {
-      if (user.password === data.password) {
+    if (user) 
+    {
+      bcrypt.compare(req.body.password, user.password, function(err, rep){
+      if (rep) {
         console.log("Logged In");
         let uid = user["_id"];
         let token = jwt.sign({ payload: uid }, JWT_KEY);
@@ -43,17 +47,15 @@ module.exports.login = async function login(req, res) {
           message: "user has logged in",
           userDetails: data,
         });
-      } else {
-        return res.json({
-          message : "wrong credentials",
-        });
+      } 
+      else {
+        console.log("Wrong Credentials");
+        return res.redirect("/login");
       }
-    } else 
+    })
+   } else 
     {
-
-      return res.json({
-        message: "user does not exist",
-      });
+      return res.redirect('/login')
     }
   } catch (err) {
     return res.json({
@@ -93,7 +95,7 @@ module.exports.protectroute = async function protectroute(req, res, next) {
       } else 
       {
         const client = req.get("User-Agent");
-        if (client.includes("Chrome")) {
+        if (client.includes("Chrome")===true) {
           return res.redirect("/login");
         } else {
           res.json({
@@ -101,6 +103,10 @@ module.exports.protectroute = async function protectroute(req, res, next) {
           });
         }
       }
+    }
+    else
+    {
+      res.redirect('/login');
     }
   } catch (err) {
     return res.json({
@@ -115,14 +121,23 @@ module.exports.forgetPassword = async function forgetPassword(req, res) {
   let { email } = req.body;
   try {
     const user = await usermodel.findOne({ email: email });
-    if (user) {
+    if (user) 
+    {
       const resetToken = user.createResetToken();
       // create url
       let resetPasswordLink = `${req.protocol}://${req.get(
         "host"
-      )}/resetPassword/${req.resetToken}`;
+      )}/resetPassword/${resetToken}`;
       //send email
+      let obj={
+        resetPasswordLink:resetPasswordLink,
+        email:email,
+      }
+      sendMail("resetPassword",obj);
       //nodemailer
+      res.json({
+        message:"Link Sent"
+      })
     } else {
       return res.json({
         message: "please signup",
@@ -143,6 +158,7 @@ module.exports.resetPassword = async function resetPassword(req, res) {
     const user = await usermodel.findOne({ resetToken: token });
     if (user) {
       user.resetPasswordHandler(password, confirmPassword);
+      console.log("password changed successfully. Please Login Again!")
       await user.save();
       res.json({
         message: "password changed successfully. Please Login Again!",

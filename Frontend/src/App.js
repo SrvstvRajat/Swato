@@ -29,7 +29,7 @@ function App() {
           <Route path="/forgetPassword">
             <ForgetPassword />
           </Route>
-          <Route path="/resetpassword">
+          <Route path="/resetpassword/:token">
             <ResetPassword />
           </Route>
           <Route path="/allPlans">

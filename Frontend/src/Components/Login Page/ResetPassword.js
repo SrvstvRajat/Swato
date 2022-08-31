@@ -12,11 +12,11 @@ function ResetPassword() {
     const [confirm, setConfirm] = useState("");
     const handleResetPassword=async()=>{
         try{
-            const data=await axios.post("/user/resetpassword/:token",{
+            const data=await axios.post("/user/resetPassword/:token",{
                 password:password,
                 confirmPassword:confirm
             });
-            // history.push("/login")
+            history.push("/login")
             console.log(data);
         }
         catch(err){

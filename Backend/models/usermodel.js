@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-
+const bcrypt=require('bcrypt')
 //  Connecting Database
 
 const crypto=require('crypto');
@@ -50,6 +50,12 @@ const userSchema=mongoose.Schema({
 
 userSchema.pre('save',function(){
     this.confirmPassword=undefined;
+})
+userSchema.pre('save',async function(){
+    let salt=await bcrypt.genSalt();
+    let hashedString=await bcrypt.hash(this.password,salt);
+    console.log(hashedString);
+    this.password=hashedString; 
 })
 
 userSchema.methods.createResetToken=function(){

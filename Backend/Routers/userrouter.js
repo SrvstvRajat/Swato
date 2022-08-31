@@ -32,6 +32,21 @@ userRouter
 .post(login)
 
 
+
+//forget password
+userRouter
+.route('/forgetPassword')
+.post(forgetPassword)
+
+//reset password
+userRouter
+.route('/resetPassword/:token')
+.post(resetPassword)
+
+
+
+
+
 //multer
 
 const multerStorage=multer.diskStorage({
@@ -72,16 +87,6 @@ userRouter
 .get(getUser)
 
 
-
-//forget password
-userRouter
-.route('/forgetPassword')
-.post(forgetPassword)
-
-//reset password
-userRouter
-.route('/resetPassword/:token')
-.post(resetPassword)
 
 
 userRouter

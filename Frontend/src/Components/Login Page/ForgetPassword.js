@@ -12,10 +12,10 @@ function ForgetPassword() {
 
     const handleForgetPassword=async()=>{
         try{
-            const data=await axios.post("/user/forgetpassword",{
+            const data=await axios.post("/user/forgetPassword",{
                 email:email
             });
-            history.push("/resetpassword")
+            history.push("/")
             console.log(data);
         }
         catch(err){
@@ -45,4 +45,4 @@ function ForgetPassword() {
     )
 }
 
-export default ForgetPassword
+export default ForgetPassword;

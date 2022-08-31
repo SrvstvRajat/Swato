@@ -12,7 +12,7 @@ function Profile() {
         // setUser(JSON.parse(users));
         // console.log(users);
         // setUser();
-        // console.log(user);
+        console.log(user);
         nameSet(user.name)
         passwordSet(user.password)
         emailSet(user.email)
