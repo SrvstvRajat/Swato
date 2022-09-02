@@ -53,6 +53,7 @@ module.exports.updateUser=async function updateUser(req,res){
         // res.send("Updated Successfully")
         }
         const updatedData=await user.save();
+        console.log("kuch to huaaaaaaaaaaaaaaa")
         res.json({
             message:'user updated succesfully',
             data:user,

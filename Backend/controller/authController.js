@@ -40,12 +40,13 @@ module.exports.login = async function login(req, res) {
       bcrypt.compare(req.body.password, user.password, function(err, rep){
       if (rep) {
         console.log("Logged In");
+        console.log(user);
         let uid = user["_id"];
         let token = jwt.sign({ payload: uid }, JWT_KEY);
         res.cookie("login", token, { httpOnly: true });
         return res.json({
           message: "user has logged in",
-          userDetails: data,
+          userDetails: user,
         });
       } 
       else {
@@ -92,7 +93,8 @@ module.exports.protectroute = async function protectroute(req, res, next) {
         req.id = user.id;
         console.log(req.id);
         next();
-      } else 
+      } 
+      else 
       {
         const client = req.get("User-Agent");
         if (client.includes("Chrome")===true) {

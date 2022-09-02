@@ -5,8 +5,8 @@ import axios from 'axios';
 
 function Profile() {
 
-    // const { user } = useAuth();
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem("user")).data);
+    const { user } = useAuth();
+    // const [user,setUser] = useState(JSON.parse(localStorage.getItem("user")).data);
     useEffect(async ()=>{
         // let users=localStorage.getItem("user")
         // setUser(JSON.parse(users));
@@ -29,8 +29,8 @@ function Profile() {
     }
     const handleClick = async () => {
         try {
-            console.log(user._id);
-            const data = await axios.patch("/user/" + user._id, {
+            console.log("/user/" + user?.userDetails?._id);
+            const data = await axios.patch("/user/" + user?.userDetails?._id, {
                email,
                 name,
                 password,
@@ -52,7 +52,7 @@ function Profile() {
                     <h1 className='h1'>Profile</h1>
                     <div className="line"></div>
                     <div className="profileImage">
-                        {/* {<img src={user.user.profileImage} /> } */}
+                        {<img src={user?.userDetails?.profileImage} /> }
                     </div>
                 </div>
                 <div className="loginBox">

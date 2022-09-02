@@ -30,8 +30,8 @@ function AuthProvider({ children }) {
                 email: email,
                 password: password
             });
-            console.log("dataaa",data.data);
-            userSet(data.data);
+            console.log(data);
+            userSet(data);
             localStorage.setItem("user", JSON.stringify(data.data));
             return data;
         }

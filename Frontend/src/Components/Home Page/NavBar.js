@@ -6,7 +6,7 @@ import '../Styles/nav.css'
 function NavBar() {
     // console.log(localStorage.getItem("user"));
     const { user, logout } = useAuth()
- 
+    console.log(user); 
     useEffect(() => {
         let navBar = document.querySelector("nav");
 
@@ -27,11 +27,10 @@ function NavBar() {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/allPlans">Plans</Link></li>
                     {user ?
-                    
                         <>
                         {console.log(user)}
                             <li>
-                                <Link to="/profilePage">ProfilePage{user?.data?.name}</Link>
+                                <Link to="/profilePage">{user?.userDetails?.name}</Link>
                             </li>
                             <li>
                                 <Link to="/logout" onClick={logout}>Logout</Link>
