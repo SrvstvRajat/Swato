@@ -31,13 +31,13 @@ function PlanDetail() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     console.log(rate);
-    // console.log("user ",user);
+    console.log("user ",user);
     const handleClick = async () => {
         console.log(123645);
         const data = await axios.post("/review/crud/"+id, {
             "review": review,
-            "rating": rate,
-            "user": user.data._id,
+            "rating": 5,
+            "user": user.userDetails._id,
             "plan": id
         })
         console.log(data);

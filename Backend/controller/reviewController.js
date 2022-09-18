@@ -67,6 +67,7 @@ module.exports.getPlanReviews=async function getPlanReviews(req,res){
 
 
 module.exports.createReview=async function createReview(req,res){
+    console.log(req.body);
     try{
         let id=req.params.plan;
         let plan=await planModel.findById(id);
