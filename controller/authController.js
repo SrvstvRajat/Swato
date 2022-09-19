@@ -3,7 +3,7 @@ const usermodel = require("../models/usermodel");
 // const protectroute=require('../Routers/authhelper')
 const jwt = require("jsonwebtoken");
 const JWT_KEY = "rchtfgyjhuji3o2e381";
-const bcrypt=require('bcrypt');
+const bcrypt=require('bcryptjs');
 const { sendMail } = require("../utility/nodemailer");
 // signup
 module.exports.signup = async function signup(req, res) {
