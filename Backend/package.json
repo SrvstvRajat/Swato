@@ -4,7 +4,6 @@
     "test": "echo \"Error:no test specified\" && exit 1",
     "start": "node App.js"
   },
-  
   "dependencies": {
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",

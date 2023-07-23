@@ -8,7 +8,7 @@ app.use(express.static('public/build'));
 const cookieParser=require('cookie-parser');
 
 app.use(express.json());
-const port=process.env.PORT || 5000;
+const port=process.env.PORT || 6000;
 app.use(cookieParser());
 app.listen(port,function(){
     console.log(`Server listening on port ${port}`);
