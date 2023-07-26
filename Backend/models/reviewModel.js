@@ -1,8 +1,8 @@
 const mongoose=require('mongoose');
+require("dotenv").config();
 
 //  Connecting Database
-const db_link='mongodb+srv://rajatsri24:12345@cluster0.0rlijyn.mongodb.net/?retryWrites=true&w=majority';
-
+const db_link=process.env.DATA_BASE;
 mongoose.connect(db_link)
 .then(function(db){
     console.log('review_db connected');

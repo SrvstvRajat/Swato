@@ -3,8 +3,8 @@ const bcrypt=require('bcryptjs')
 //  Connecting Database
 
 const crypto=require('crypto');
-const db_link='mongodb+srv://rajatsri24:12345@cluster0.0rlijyn.mongodb.net/?retryWrites=true&w=majority';
-
+require("dotenv").config();
+const db_link=process.env.DATA_BASE;
 mongoose.connect(db_link)
 .then(function(db){
     console.log('db connected');
