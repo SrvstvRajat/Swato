@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
 const bcrypt=require('bcryptjs')
+console.log(bcrypt)
 //  Connecting Database
 
 const crypto=require('crypto');
